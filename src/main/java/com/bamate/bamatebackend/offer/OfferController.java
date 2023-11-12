@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/offers")
 public class OfferController {
 
     private final OfferRepository repository;
@@ -14,26 +15,26 @@ public class OfferController {
         this.repository = repository;
     }
 
-    @GetMapping("/offers")
+    @GetMapping
     public List<Offer> allOffers() {
         return repository.findAll();
     }
 
-    @PostMapping("/offers")
+    @PostMapping
     Offer newOffer(@RequestBody Offer newOffer) {
         return repository.save(newOffer);
     }
 
     // Single item
 
-    @GetMapping("/offers/{id}")
+    @GetMapping("/{id}")
     Offer one(@PathVariable Long id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new OfferNotFoundException(id));
     }
 
-    @DeleteMapping("/offers/{id}")
+    @DeleteMapping("/{id}")
     void deleteEmployee(@PathVariable Long id) {
         repository.deleteById(id);
     }

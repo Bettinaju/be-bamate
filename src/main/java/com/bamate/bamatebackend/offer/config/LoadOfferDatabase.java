@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-class LoadDatabase {
+class LoadOfferDatabase {
 
-    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+    private static final Logger log = LoggerFactory.getLogger(LoadOfferDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(OfferRepository repository) {
+    CommandLineRunner initOfferDatabase(OfferRepository repository) {
         // String email, String name, Degree degree, String description, Boolean isAvailable
         return args -> {
             log.info("Preloading " + repository.save(new Offer("damaris@testl.com", "Damaris Test", Degree.BACHELOR, "I like turtles", false)));

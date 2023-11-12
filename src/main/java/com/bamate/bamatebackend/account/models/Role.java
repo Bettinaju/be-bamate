@@ -1,4 +1,4 @@
-package com.bamate.bamatebackend.user.models;
+package com.bamate.bamatebackend.account.models;
 
 public enum Role {
     STUDENT,

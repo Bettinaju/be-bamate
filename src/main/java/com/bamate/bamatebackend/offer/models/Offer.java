@@ -11,7 +11,7 @@ public class Offer {
 
     private @Id @GeneratedValue Long id;
 
-    // TODO: Somehow link offer to supervisor
+    // TODO: Somehow link offer to supervisor/account
     private String email;
     private String name;
     private Degree degree;
