@@ -20,7 +20,6 @@ public class AccountController {
 
     @GetMapping
     public List<Account> allAccount() {
-        System.out.println("sfdklj");
         return repository.findAll();
     }
 
