@@ -35,7 +35,7 @@ public class Account {
         this.email = email;
     }
 
-    public String getFirsttName() {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -90,5 +90,6 @@ public class Account {
     public String toString() {
         return "Account{" + "id=" + this.id + ", firstName='" + this.firstName + '\'' + ", lastName='" + this.lastName + '\'' + ", email='" + this.email + '\'' + '}';
     }
+
 
 }

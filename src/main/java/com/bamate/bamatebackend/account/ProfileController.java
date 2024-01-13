@@ -1,26 +1,37 @@
 package com.bamate.bamatebackend.account;
 
 import com.bamate.bamatebackend.account.models.Account;
+import com.bamate.bamatebackend.account.models.Supervisor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/profile")
 public class ProfileController {
-    private final AccountRepository repository;
+    private final AccountRepository accountRepository;
+    private final SupervisorRepository supervisorRepository;
 
-    ProfileController(AccountRepository repository) { this.repository = repository; }
+    ProfileController(AccountRepository accountRepository, SupervisorRepository supervisorRepository) {
+        this.accountRepository = accountRepository;
+        this.supervisorRepository = supervisorRepository;
+    }
     @GetMapping("/{id}")
     Account one(@PathVariable Long id) {
 
-        return repository.findById(id)
+        return accountRepository.findById(id)
                 .orElseThrow(() -> new AccountNotFoundException(id));
     }
 
     @PutMapping("/{id}")
-    // TODO add endpoint to save profile changes
+    @ResponseStatus(HttpStatus.OK)
+    Supervisor replaceSupervisorProfile(@RequestBody Supervisor newSupervisorProfile, @PathVariable Long id) {
+        Supervisor oldSupervisorProfile = supervisorRepository.findById(id).orElseThrow(() -> new AccountNotFoundException(id));
+        oldSupervisorProfile.setDescription(newSupervisorProfile.getDescription());
+        return supervisorRepository.save(oldSupervisorProfile);
+    }
 
     @DeleteMapping("/{id}")
     void deleteAccount(@PathVariable Long id) {
-        repository.deleteById(id);
+        accountRepository.deleteById(id);
     }
 }
