@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  bamate-db:
+    image: postgres:12
+    container_name: bamate-db
+    ports:
+      - '5432:5432'
+    volumes:
+      - bamate-data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: bamate
+      POSTGRES_PASSWORD: bamate
+      POSTGRES_DB: bamate-db
+    networks:
+      - internal
+
+networks:
+  internal:
+    name: internal
+
+volumes:
+  bamate-data:
