@@ -1,6 +1,7 @@
 package com.bamate.bamatebackend.account;
 
 import com.bamate.bamatebackend.account.models.Account;
+import com.bamate.bamatebackend.account.models.Role;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,26 +14,10 @@ public class AccountController {
 
     AccountController(AccountRepository repository) { this.repository = repository; }
 
-    @PostMapping
-    Account newAccount(@RequestBody Account newAccount) {
-        return repository.save(newAccount);
-    }
-
     @GetMapping
     public List<Account> allAccount() {
         return repository.findAll();
     }
 
-    // Single item
-    @GetMapping("/{id}")
-    Account one(@PathVariable Long id) {
 
-        return repository.findById(id)
-                .orElseThrow(() -> new AccountNotFoundException(id));
-    }
-
-    @DeleteMapping("/{id}")
-    void deleteEmployee(@PathVariable Long id) {
-        repository.deleteById(id);
-    }
 }

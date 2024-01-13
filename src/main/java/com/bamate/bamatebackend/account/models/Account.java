@@ -11,19 +11,20 @@ public class Account {
 
     private @Id @GeneratedValue Long id;
     private String email;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String password;
     private Role role;
 
-    public Account(String email, String name, String password, Role role) {
+    public Account(String email, String firstName, String lastName, String password, Role role) {
         this.email = email;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
         this.role = role;
     }
 
-    public Account() {
-    }
+    public Account() {}
 
 
     public String getEmail() {
@@ -34,12 +35,19 @@ public class Account {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getFirsttName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -75,12 +83,12 @@ public class Account {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.email);
+        return Objects.hash(this.id, this.firstName, this.lastName, this.email);
     }
 
     @Override
     public String toString() {
-        return "Account{" + "id=" + this.id + ", name='" + this.name + '\'' + ", email='" + this.email + '\'' + '}';
+        return "Account{" + "id=" + this.id + ", firstName='" + this.firstName + '\'' + ", lastName='" + this.lastName + '\'' + ", email='" + this.email + '\'' + '}';
     }
 
 }
