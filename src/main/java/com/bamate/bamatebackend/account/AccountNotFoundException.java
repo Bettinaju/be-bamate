@@ -2,7 +2,7 @@ package com.bamate.bamatebackend.account;
 
 public class AccountNotFoundException extends RuntimeException{
 
-   AccountNotFoundException(Long id) {
+   public AccountNotFoundException(Long id) {
         super("Could not find account " + id);
     }
 }

@@ -1,5 +1,8 @@
-package com.bamate.bamatebackend.account;
+package com.bamate.bamatebackend.account.controllers;
 
+import com.bamate.bamatebackend.account.AccountNotFoundException;
+import com.bamate.bamatebackend.account.AccountRepository;
+import com.bamate.bamatebackend.account.SupervisorRepository;
 import com.bamate.bamatebackend.account.models.Account;
 import com.bamate.bamatebackend.account.models.Supervisor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +18,8 @@ public class ProfileController {
         this.accountRepository = accountRepository;
         this.supervisorRepository = supervisorRepository;
     }
+
+    // endpoint to show profile information
     @GetMapping("/{id}")
     Account one(@PathVariable Long id) {
 
@@ -22,6 +27,7 @@ public class ProfileController {
                 .orElseThrow(() -> new AccountNotFoundException(id));
     }
 
+    // endpoint to update profile information of supervisor
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     Supervisor replaceSupervisorProfile(@RequestBody Supervisor newSupervisorProfile, @PathVariable Long id) {
@@ -30,6 +36,7 @@ public class ProfileController {
         return supervisorRepository.save(oldSupervisorProfile);
     }
 
+    // endpoint to delete a profile, complete account will be deleted
     @DeleteMapping("/{id}")
     void deleteAccount(@PathVariable Long id) {
         accountRepository.deleteById(id);

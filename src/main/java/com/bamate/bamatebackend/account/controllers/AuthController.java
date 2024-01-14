@@ -1,5 +1,6 @@
-package com.bamate.bamatebackend.account;
+package com.bamate.bamatebackend.account.controllers;
 
+import com.bamate.bamatebackend.account.AccountRepository;
 import com.bamate.bamatebackend.account.models.Account;
 import com.bamate.bamatebackend.account.models.LoginDetailsDTO;
 import org.springframework.http.HttpStatus;
