@@ -1,12 +1,12 @@
 package com.bamate.bamatebackend.account.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
+@Table(name = "account")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Account {
 
     private @Id @GeneratedValue Long id;

@@ -1,11 +1,10 @@
 package com.bamate.bamatebackend.account.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "supervisor")
 public class Supervisor extends Account {
 
     private String description;
