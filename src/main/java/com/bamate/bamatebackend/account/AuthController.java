@@ -1,6 +1,9 @@
 package com.bamate.bamatebackend.account;
 
 import com.bamate.bamatebackend.account.models.Account;
+import com.bamate.bamatebackend.account.models.LoginDetailsDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +16,21 @@ public class AuthController {
     AuthController(AccountRepository repository) { this.repository = repository; }
 
     // Registration endpoint
-    @PostMapping
+    @PostMapping("/register")
     Account newAccount(@RequestBody Account newAccount) {
         return repository.save(newAccount);
     }
 
-    // TODO Login endpoint
+    // Login endpoint
+    @PostMapping("/login")
+    ResponseEntity<String> login(@RequestBody LoginDetailsDTO loginRequest) {
+        Account existingAccount = repository.findByEmail(loginRequest.getEmail());
+
+        if (existingAccount != null && existingAccount.getPassword().equals(loginRequest.getPassword())) {
+            return ResponseEntity.ok("Login successful");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+        }
+    }
+
 }
