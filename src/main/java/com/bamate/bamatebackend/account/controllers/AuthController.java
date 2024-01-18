@@ -3,6 +3,7 @@ package com.bamate.bamatebackend.account.controllers;
 import com.bamate.bamatebackend.account.AccountRepository;
 import com.bamate.bamatebackend.account.models.Account;
 import com.bamate.bamatebackend.account.models.LoginDetailsDTO;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +17,16 @@ public class AuthController {
     private final AccountRepository repository;
     AuthController(AccountRepository repository) { this.repository = repository; }
 
+    // TODO: handle error, if email is already used
     // Registration endpoint
     @PostMapping("/register")
-    Account newAccount(@RequestBody Account newAccount) {
-        return repository.save(newAccount);
+    public ResponseEntity<?> register(@RequestBody Account newAccount) {
+        try {
+            Account savedAccount = repository.save(newAccount);
+            return new ResponseEntity<>(savedAccount, HttpStatus.CREATED);
+        } catch (DataIntegrityViolationException ex) {
+            return new ResponseEntity<>("E-Mail-Adresse bereits registriert", HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Login endpoint

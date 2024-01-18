@@ -9,4 +9,6 @@ import java.util.List;
 public interface AccountRepository extends JpaRepository<Account, Long> {
     List<Account> findByRole(Role role);
     Account findByEmail(String email);
+    void deleteByEmail(String email);
+
 }

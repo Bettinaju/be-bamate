@@ -10,6 +10,7 @@ import java.util.Objects;
 public class Account {
 
     private @Id @GeneratedValue Long id;
+    @Column(unique = true)
     private String email;
     private String firstName;
     private String lastName;

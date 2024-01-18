@@ -35,6 +35,7 @@ public class ProfileController {
         return supervisorRepository.save(oldSupervisorProfile);
     }
 
+    // TODO: Fix that delete works with email instead of id
     // endpoint to delete a profile, complete account will be deleted
     @DeleteMapping("/{id}")
     void deleteAccount(@PathVariable Long id) {
