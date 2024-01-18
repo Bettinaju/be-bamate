@@ -17,7 +17,6 @@ public class AuthController {
     private final AccountRepository repository;
     AuthController(AccountRepository repository) { this.repository = repository; }
 
-    // TODO: handle error, if email is already used
     // Registration endpoint
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Account newAccount) {
