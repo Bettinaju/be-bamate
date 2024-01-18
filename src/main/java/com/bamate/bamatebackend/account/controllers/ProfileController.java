@@ -20,18 +20,17 @@ public class ProfileController {
     }
 
     // endpoint to show profile information
-    @GetMapping("/{id}")
-    Account one(@PathVariable Long id) {
-
-        return accountRepository.findById(id)
-                .orElseThrow(() -> new AccountNotFoundException(id));
+    @GetMapping("/{email}")
+    Account one(@PathVariable String email) {
+        return supervisorRepository.findByEmail(email)
+                .orElseThrow(() -> new AccountNotFoundException());
     }
 
     // endpoint to update profile information of supervisor
-    @PutMapping("/{id}")
+    @PutMapping("/{email}")
     @ResponseStatus(HttpStatus.OK)
-    Supervisor replaceSupervisorProfile(@RequestBody Supervisor newSupervisorProfile, @PathVariable Long id) {
-        Supervisor oldSupervisorProfile = supervisorRepository.findById(id).orElseThrow(() -> new AccountNotFoundException(id));
+    Supervisor replaceSupervisorProfile(@RequestBody Supervisor newSupervisorProfile, @PathVariable String email) {
+        Supervisor oldSupervisorProfile = supervisorRepository.findByEmail(email).orElseThrow(() -> new AccountNotFoundException());
         oldSupervisorProfile.setDescription(newSupervisorProfile.getDescription());
         return supervisorRepository.save(oldSupervisorProfile);
     }
