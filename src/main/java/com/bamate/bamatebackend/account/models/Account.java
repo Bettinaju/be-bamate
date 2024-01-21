@@ -1,20 +1,35 @@
 package com.bamate.bamatebackend.account.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Objects;
+import java.util.Collection;
+import java.util.List;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "account")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Account {
+public class Account implements UserDetails {
 
-    private @Id @GeneratedValue Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
     @Column(unique = true)
     private String email;
     private String firstName;
     private String lastName;
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public Account(String email, String firstName, String lastName, String password, Role role) {
@@ -25,7 +40,40 @@ public class Account {
         this.role = role;
     }
 
-    public Account() {}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 
     public String getEmail() {
@@ -51,10 +99,6 @@ public class Account {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -66,33 +110,5 @@ public class Account {
     }
 
     public Long getId() {return id; }
-
-
-
-    @Override
-    public boolean equals(Object o) {
-
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Account)) {
-            return false;
-        }
-        Account account = (Account) o;
-        return Objects.equals(this.id, account.id) && Objects.equals(this.email, account.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id, this.firstName, this.lastName, this.email);
-    }
-
-    @Override
-    public String toString() {
-        return "Account{" + "id=" + this.id + ", firstName='" + this.firstName + '\'' + ", lastName='" + this.lastName + '\'' + ", email='" + this.email + '\'' + '}';
-    }
-
-
-
 
 }
