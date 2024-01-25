@@ -6,11 +6,13 @@ import com.bamate.bamatebackend.supervisor.SupervisorRepository;
 import com.bamate.bamatebackend.account.models.Account;
 import com.bamate.bamatebackend.supervisor.models.Supervisor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/profile")
 public class ProfileController {
+    // TODO: remove unused stuff - maybe restructure
     private final AccountRepository accountRepository;
     private final SupervisorRepository supervisorRepository;
 
@@ -41,10 +43,16 @@ public class ProfileController {
         return supervisorRepository.save(oldSupervisorProfile);
     }
 
-    // FIXME: that delete works with email instead of id
     // endpoint to delete a profile, complete account will be deleted
-    @DeleteMapping("/{id}")
-    void deleteAccount(@PathVariable Long id) {
-        accountRepository.deleteById(id);
+    @DeleteMapping("/{email}")
+    public ResponseEntity<String> deleteSupervisorByEmail(@PathVariable String email) {
+        Supervisor supervisor = supervisorRepository.findByEmail(email).orElse(null);
+
+        if (supervisor != null) {
+            supervisorRepository.delete(supervisor);
+            return new ResponseEntity<>("Supervisor with email " + email + " deleted successfully.", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Supervisor with email " + email + " not found.", HttpStatus.NOT_FOUND);
+        }
     }
 }
