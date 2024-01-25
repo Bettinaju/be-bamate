@@ -37,7 +37,6 @@ public class LoadAccountDatabase {
             Set<Interest> aliceInterests = EnumSet.of(Interest.DATENBANKEN);
             log.info("Preloading " + supervisorRepository.save(new Supervisor("alice@test.com", "Alice", "Boe", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Alice's Description", aliceInterests)));
 
-            // Keine Interessen
             Supervisor notAvailableSupervisor = new Supervisor("jana@test.com", "Jana", "Ko", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Jana's Description - I am not available", Collections.emptySet());
             notAvailableSupervisor.setAvailability(false);
             log.info("Preloading " + supervisorRepository.save(notAvailableSupervisor));

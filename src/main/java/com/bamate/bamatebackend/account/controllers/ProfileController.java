@@ -31,11 +31,17 @@ public class ProfileController {
     @ResponseStatus(HttpStatus.OK)
     Supervisor replaceSupervisorProfile(@RequestBody Supervisor newSupervisorProfile, @PathVariable String email) {
         Supervisor oldSupervisorProfile = supervisorRepository.findByEmail(email).orElseThrow(() -> new AccountNotFoundException());
+
         oldSupervisorProfile.setDescription(newSupervisorProfile.getDescription());
+        oldSupervisorProfile.setAvailability(newSupervisorProfile.isAvailable());
+
+        oldSupervisorProfile.getInterests().clear();
+        oldSupervisorProfile.getInterests().addAll(newSupervisorProfile.getInterests());
+
         return supervisorRepository.save(oldSupervisorProfile);
     }
 
-    // TODO: Fix that delete works with email instead of id
+    // FIXME: that delete works with email instead of id
     // endpoint to delete a profile, complete account will be deleted
     @DeleteMapping("/{id}")
     void deleteAccount(@PathVariable Long id) {
