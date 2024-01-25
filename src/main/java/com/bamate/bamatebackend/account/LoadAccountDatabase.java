@@ -3,7 +3,9 @@ package com.bamate.bamatebackend.account;
 import com.bamate.bamatebackend.account.models.Account;
 
 import com.bamate.bamatebackend.account.models.Role;
-import com.bamate.bamatebackend.account.models.Supervisor;
+import com.bamate.bamatebackend.supervisor.models.Interest;
+import com.bamate.bamatebackend.supervisor.models.Supervisor;
+import com.bamate.bamatebackend.supervisor.SupervisorRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.Set;
 
 @Configuration
 @RequiredArgsConstructor
@@ -23,14 +29,18 @@ public class LoadAccountDatabase {
     CommandLineRunner initAccountDatabase(AccountRepository accountRepository, SupervisorRepository supervisorRepository) {
         return args -> {
             log.info("Preloading " + accountRepository.save(new Account("dami@test.com", "Dami", "Li", passwordEncoder.encode("12345678"), Role.STUDENT)));
-            log.info("Preloading " + accountRepository.save(new Account("freiheit@test.com", "Jörn", "Freiehit", passwordEncoder.encode("12345678"), Role.ADMIN)));
+            log.info("Preloading " + accountRepository.save(new Account("freiheit@test.com", "Jörn", "Freiheit", passwordEncoder.encode("12345678"), Role.ADMIN)));
 
-            log.info("Preloading " + supervisorRepository.save(new Supervisor("betti@test.com", "Betti", "Ju", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Bettis Description")));
+            Set<Interest> bettiInterests = EnumSet.of(Interest.WEB_DEVELOPMENT, Interest.DATENBANKEN);
+            log.info("Preloading " + supervisorRepository.save(new Supervisor("betti@test.com", "Betti", "Ju", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Betti's Description", bettiInterests)));
 
-            Supervisor notAvailableSupervisor = new Supervisor("jana@test.com", "Jana", "Ko", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Janas Description - I am not available");
+            Set<Interest> aliceInterests = EnumSet.of(Interest.DATENBANKEN);
+            log.info("Preloading " + supervisorRepository.save(new Supervisor("alice@test.com", "Alice", "Boe", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Alice's Description", aliceInterests)));
+
+            // Keine Interessen
+            Supervisor notAvailableSupervisor = new Supervisor("jana@test.com", "Jana", "Ko", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Jana's Description - I am not available", Collections.emptySet());
             notAvailableSupervisor.setAvailability(false);
             log.info("Preloading " + supervisorRepository.save(notAvailableSupervisor));
-
         };
     }
 
