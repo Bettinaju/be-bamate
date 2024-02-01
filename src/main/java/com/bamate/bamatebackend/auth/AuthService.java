@@ -3,6 +3,7 @@ package com.bamate.bamatebackend.auth;
 import com.bamate.bamatebackend.account.AccountNotFoundException;
 import com.bamate.bamatebackend.account.AccountRepository;
 import com.bamate.bamatebackend.account.models.Account;
+import com.bamate.bamatebackend.account.models.Role;
 import com.bamate.bamatebackend.auth.models.AuthenticationRequest;
 import com.bamate.bamatebackend.auth.models.AuthenticationResponse;
 import com.bamate.bamatebackend.auth.models.RegisterRequest;
@@ -22,6 +23,7 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authManager;
 
+
     public AuthenticationResponse register(RegisterRequest request) {
         var user = Account.builder()
                 .firstName(request.getFirstName())
@@ -32,7 +34,8 @@ public class AuthService {
                 .build();
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        Role userRole = user.getRole();
+        return AuthenticationResponse.builder().token(jwtToken).role(userRole).build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -41,8 +44,9 @@ public class AuthService {
         var user = repository.findByEmail(
                 request.getEmail()).orElseThrow(() -> new AccountNotFoundException(request.getEmail())
         );
+        Role userRole = user.getRole();
 
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        return AuthenticationResponse.builder().token(jwtToken).role(userRole).build();
     }
 }
