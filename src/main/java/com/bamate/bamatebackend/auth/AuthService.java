@@ -35,7 +35,7 @@ public class AuthService {
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
         Role userRole = user.getRole();
-        return AuthenticationResponse.builder().token(jwtToken).role(userRole).build();
+        return AuthenticationResponse.builder().token(jwtToken).role(userRole).email(user.getEmail()).build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -44,9 +44,10 @@ public class AuthService {
         var user = repository.findByEmail(
                 request.getEmail()).orElseThrow(() -> new AccountNotFoundException(request.getEmail())
         );
-        Role userRole = user.getRole();
 
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder().token(jwtToken).role(userRole).build();
+        Role userRole = user.getRole();
+
+        return AuthenticationResponse.builder().token(jwtToken).role(userRole).email(user.getEmail()).build();
     }
 }
