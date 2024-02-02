@@ -8,6 +8,8 @@ import com.bamate.bamatebackend.auth.models.AuthenticationRequest;
 import com.bamate.bamatebackend.auth.models.AuthenticationResponse;
 import com.bamate.bamatebackend.auth.models.RegisterRequest;
 import com.bamate.bamatebackend.config.JwtService;
+import com.bamate.bamatebackend.supervisor.SupervisorRepository;
+import com.bamate.bamatebackend.supervisor.models.Supervisor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +24,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authManager;
+    private final SupervisorRepository supervisorRepository;
 
 
     public AuthenticationResponse register(RegisterRequest request) {
@@ -32,7 +35,12 @@ public class AuthService {
                 .role(request.getRole())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
-        repository.save(user);
+        if (request.getRole() == Role.SUPERVISOR) {
+            Supervisor supervisor = new Supervisor(user);
+           supervisorRepository.save(supervisor); // The supervisor has User data, and when it is saved, the User will also be saved.
+        } else {
+            Account savedUser = repository.save(user);
+        }
         var jwtToken = jwtService.generateToken(user);
         Role userRole = user.getRole();
         return AuthenticationResponse.builder().token(jwtToken).role(userRole).email(user.getEmail()).build();
