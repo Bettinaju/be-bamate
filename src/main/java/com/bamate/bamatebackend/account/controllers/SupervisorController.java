@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ public class SupervisorController {
     @GetMapping()
     public List<SupervisorDTO> supervisorAccounts() {
         return repository.findByRole(Role.SUPERVISOR).stream()
-                .map(supervisor -> convertToSupervisorDTO((Supervisor) supervisor))
+                .map(account -> convertToSupervisorDTO(new Supervisor(account)))
                 .collect(Collectors.toList());
     }
 
