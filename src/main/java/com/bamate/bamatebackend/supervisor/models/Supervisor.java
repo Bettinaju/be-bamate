@@ -25,6 +25,12 @@ public class Supervisor extends Account {
         this.interests = interests;
     }
 
+    public Supervisor(Account account)
+    {
+        super(account.getEmail(), account.getFirstName(), account.getLastName(), account.getPassword(), Role.SUPERVISOR);
+        this.description = "";
+    }
+
     public Supervisor() {}
 
     public String getDescription() {
