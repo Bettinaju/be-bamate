@@ -5,6 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents an authentication request sent by a user.
+ * This class encapsulates the {@code email} and {@code password} used for authentication.
+ */
 @Data
 @Builder
 @AllArgsConstructor

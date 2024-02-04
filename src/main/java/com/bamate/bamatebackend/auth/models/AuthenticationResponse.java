@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents an authentication response sent to the user after successful authentication.
+ * This class encapsulates the {@code token}, {@code role}, and {@code email} associated with the authenticated user.
+ */
 @Data
 @Builder
 @AllArgsConstructor
