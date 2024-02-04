@@ -4,22 +4,19 @@ import com.bamate.bamatebackend.account.AccountRepository;
 import com.bamate.bamatebackend.account.dto.SupervisorDTO;
 import com.bamate.bamatebackend.account.models.Role;
 import com.bamate.bamatebackend.supervisor.models.Supervisor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/supervisors")
 public class SupervisorController {
     private final AccountRepository repository;
-
-    SupervisorController(AccountRepository repository) {
-        this.repository = repository;
-    }
 
     // List content endpoint
     @GetMapping()
@@ -29,6 +26,7 @@ public class SupervisorController {
                 .collect(Collectors.toList());
     }
 
+    // to response only relevant information
     private SupervisorDTO convertToSupervisorDTO(Supervisor supervisor) {
         return new SupervisorDTO(
                 supervisor.getId(),

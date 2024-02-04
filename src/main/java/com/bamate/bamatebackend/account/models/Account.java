@@ -1,10 +1,7 @@
 package com.bamate.bamatebackend.account.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,14 +18,19 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Account implements UserDetails {
 
+    @Getter
     @Id
     @GeneratedValue
     private Long id;
+    @Getter
     @Column(unique = true)
     private String email;
+    @Getter
     private String firstName;
+    @Getter
     private String lastName;
     private String password;
+    @Getter
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -76,23 +78,12 @@ public class Account implements UserDetails {
     }
 
 
-    public String getEmail() {
-        return email;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-    public String getLastName() {
-        return lastName;
     }
 
     public void setLastName(String lastName) {
@@ -104,11 +95,5 @@ public class Account implements UserDetails {
     }
 
     public void setRole(Role role) { this.role = role; }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public Long getId() {return id; }
 
 }
