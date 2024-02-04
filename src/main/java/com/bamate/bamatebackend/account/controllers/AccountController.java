@@ -33,7 +33,12 @@ public class AccountController {
         return repository.findAll();
     }
 
-    // create new account
+    /**
+     * Endpoint for creating a new {@code account}.
+     * Creates a new {@code account} based on the provided {@code account} details.
+     * @param newAccount The new {@code account} to be created.
+     * @return A response entity containing the created {@code account} or an error message.
+     */
     @PostMapping
     public ResponseEntity<?> createAccount(@RequestBody Account newAccount) {
         try {
