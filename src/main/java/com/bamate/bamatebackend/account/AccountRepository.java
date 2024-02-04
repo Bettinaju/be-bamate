@@ -25,6 +25,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
      * @return An optional containing the {@code account} with the specified {@code email}, if found.
      */
     Optional<Account> findByEmail(String email);
+
     /**
      * Deletes an {@code account} by its {@code email}.
      * @param email The provided {@code email} of the {@code account} that is to be deleted.

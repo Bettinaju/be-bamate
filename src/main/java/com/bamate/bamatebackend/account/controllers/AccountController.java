@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST controller responsible for handling account-related endpoints.
+ * This controller manages operations related to accounts, such as retrieving all accounts.
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/account")
@@ -18,12 +22,6 @@ public class AccountController {
 
     private final AccountRepository repository;
     private final PasswordEncoder passwordEncoder;
-
-    /**
-     * Constructor for {@code AccountController}.
-     * @param repository The repository used for accessing account data.
-     */
-    AccountController(AccountRepository repository) { this.repository = repository; }
 
     /**
      * Endpoint for retrieving all accounts.

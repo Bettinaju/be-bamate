@@ -19,7 +19,12 @@ public class ProfileController {
 
     private final SupervisorRepository supervisorRepository;
 
-    // endpoint to show profile information
+    /**
+     * Retrieves profile information for a given {@code email}.
+     * @param email The {@code email} of the profile to retrieve.
+     * @return The {@code Account} associated with the {@code email}.
+     * @throws AccountNotFoundException if no {@code Account} is found with the given {@code email}.
+     */
     @GetMapping("/{email}")
     Account one(@PathVariable String email) {
         return supervisorRepository.findByEmail(email)
