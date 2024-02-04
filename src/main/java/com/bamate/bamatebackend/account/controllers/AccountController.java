@@ -19,7 +19,17 @@ public class AccountController {
     private final AccountRepository repository;
     private final PasswordEncoder passwordEncoder;
 
-    // all accounts
+    /**
+     * Constructor for {@code AccountController}.
+     * @param repository The repository used for accessing account data.
+     */
+    AccountController(AccountRepository repository) { this.repository = repository; }
+
+    /**
+     * Endpoint for retrieving all accounts.
+     * Retrieves a list of all accounts from the repository.
+     * @return A list of {@code Account} objects representing all accounts.
+     */
     @GetMapping
     public List<Account> allAccount() {
         return repository.findAll();

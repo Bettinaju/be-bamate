@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller responsible for handling profile-related operations.
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/profile")
@@ -23,7 +26,13 @@ public class ProfileController {
                 .orElseThrow(AccountNotFoundException::new);
     }
 
-    // endpoint to update profile information of supervisor
+    /**
+     * Updates the profile information of a {@code Supervisor}.
+     * @param newSupervisorProfile The new profile information to replace the old one.
+     * @param email The {@code email} of the {@code Supervisor} whose profile is to be updated.
+     * @return The updated {@code Supervisor} profile.
+     * @throws AccountNotFoundException if no {@code Supervisor} is found with the given {@code email}.
+     */
     @PutMapping("/{email}")
     @ResponseStatus(HttpStatus.OK)
     Supervisor replaceSupervisorProfile(@RequestBody Supervisor newSupervisorProfile, @PathVariable String email) {
@@ -38,7 +47,11 @@ public class ProfileController {
         return supervisorRepository.save(oldSupervisorProfile);
     }
 
-    // endpoint to delete a profile, complete account will be deleted
+    /**
+     * Deletes a supervisor's profile and account by {@code email}.
+     * @param email The {@code email} of the {@code Supervisor} whose profile is to be deleted.
+     * @return ResponseEntity with a message indicating success or failure of deletion.
+     */
     @DeleteMapping("/{email}")
     public ResponseEntity<String> deleteSupervisorByEmail(@PathVariable String email) {
         Supervisor supervisor = supervisorRepository.findByEmail(email).orElse(null);

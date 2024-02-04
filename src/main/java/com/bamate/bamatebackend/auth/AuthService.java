@@ -16,6 +16,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class responsible for authentication-related operations.
+ * This service manages user registration and authentication processes.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -26,7 +30,11 @@ public class AuthService {
     private final AuthenticationManager authManager;
     private final SupervisorRepository supervisorRepository;
 
-
+    /**
+     * Registers a new user based on the provided registration request.
+     * @param request The registration request containing user details.
+     * @return AuthenticationResponse containing the generated JWT token and user role.
+     */
     public AuthenticationResponse register(RegisterRequest request) {
         var user = Account.builder()
                 .firstName(request.getFirstName())
@@ -46,6 +54,12 @@ public class AuthService {
         return AuthenticationResponse.builder().token(jwtToken).role(userRole).email(user.getEmail()).build();
     }
 
+    /**
+     * Authenticates a user based on the provided authentication request.
+     * @param request The authentication request containing user credentials.
+     * @return AuthenticationResponse containing the generated JWT token and user role.
+     * @throws AccountNotFoundException if the user account is not found.
+     */
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authManager.authenticate( new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
