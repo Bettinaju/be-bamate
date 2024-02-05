@@ -26,7 +26,6 @@ public class SupervisorController {
      * Retrieves a list of {@code supervisor} accounts from the repository and converts them to SupervisorDTO objects.
      * @return A list of SupervisorDTO objects representing {@code supervisor} accounts.
      */
-    // List content endpoint
     @GetMapping()
     public List<Account> supervisorAccounts() {
         return repository.findByRole(Role.SUPERVISOR);
