@@ -6,7 +6,7 @@ All data is persisted in a PostgreSQL database, which is provided as a local Doc
 ## How to start BaMate Backend locally
 #### Requirements
 - Java 17
-- Docker and [Docker Compose](https://docs.docker.com/compose/install/) (both included in the normal Docker Desktop installation)
+- Docker and [Docker Compose](https://docs.docker.com/compose/install/) (both included in the normal [Docker Desktop](https://docs.docker.com/desktop/) installation)
 - IntelliJ (or a comparable IDE that supports Java, Maven and Spring)
 - Functioning Command Line Interface (i.e. the Terminal)
 #### Database Docker Container
