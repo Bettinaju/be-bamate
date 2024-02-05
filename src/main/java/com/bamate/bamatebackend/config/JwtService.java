@@ -20,7 +20,7 @@ import java.util.function.Function;
  */
 @Service
 public class JwtService {
-    private static final String SECRET_KEY = "gCwJlrkIPIEjVRlp9QqWOgboY4tDncW9IPIEjVRlp9QqWOggCwJlrkIadasdasda9"; // FIXME: USE secure secret
+    private static final String SECRET_KEY = "gCwJlrkIPIEjVRlp9QqWOgboY4tDncW9IPIEjVRlp9QqWOggCwJlrkIadasdasda9";
     private static final int HALF_HOUR = 1000 * 60 * 30;
 
     /**

@@ -36,9 +36,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/api-docs/**", "/api-docs.yaml", "/swagger", "/favicon.ico").permitAll()
-/*
-                        .requestMatchers("/supervisors/**").hasAnyRole(Role.ADMIN.name(), Role.STUDENT.name()) // FIXME: Find out how to scope permission to roles
-*/
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
