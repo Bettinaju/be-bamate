@@ -13,7 +13,7 @@ All data is persisted in a PostgreSQL database, which is provided as a local Doc
 If you are already comfortable with Docker, execute the `bamate-backend/docker-compose.yml` file using your preferred environment.
 Otherwise, follow these steps:
 1. Make sure the Docker Daemon is running (e.g. by starting Docker Desktop)
-2. Open your terminal and navigate to the repository's root `cd bamate-backend`
+2. Open your terminal and navigate to the repository's root using `cd bamate-backend`
 3. Spin up the database container using `docker compose up`
 4. Wait a few minutes for the build to finish (you can see the container status in your open Terminal or Docker Desktop's Dashboard)
 
