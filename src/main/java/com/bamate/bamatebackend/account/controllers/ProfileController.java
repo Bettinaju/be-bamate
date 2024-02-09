@@ -43,8 +43,12 @@ public class ProfileController {
     Supervisor replaceSupervisorProfile(@RequestBody Supervisor newSupervisorProfile, @PathVariable String email) {
         Supervisor oldSupervisorProfile = supervisorRepository.findByEmail(email).orElseThrow(AccountNotFoundException::new);
 
-        oldSupervisorProfile.setDescription(newSupervisorProfile.getDescription());
+        oldSupervisorProfile.setFirstName(newSupervisorProfile.getFirstName());
+        oldSupervisorProfile.setLastName(newSupervisorProfile.getLastName());
+        oldSupervisorProfile.setRecentJob(newSupervisorProfile.getRecentJob());
+        oldSupervisorProfile.setPreviousJob(newSupervisorProfile.getPreviousJob());
         oldSupervisorProfile.setAvailability(newSupervisorProfile.isAvailable());
+        oldSupervisorProfile.setJobReference(newSupervisorProfile.getJobReference());
 
         oldSupervisorProfile.getInterests().clear();
         oldSupervisorProfile.getInterests().addAll(newSupervisorProfile.getInterests());
@@ -68,4 +72,5 @@ public class ProfileController {
             return new ResponseEntity<>("Supervisor with email " + email + " not found.", HttpStatus.NOT_FOUND);
         }
     }
+
 }

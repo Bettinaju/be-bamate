@@ -3,6 +3,7 @@ package com.bamate.bamatebackend.supervisor;
 import com.bamate.bamatebackend.supervisor.models.Supervisor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -15,4 +16,9 @@ public interface SupervisorRepository extends JpaRepository <Supervisor, Long> {
      * @return An Optional containing the {@code Supervisor} with the specified {@code email}, if found.
      */
     Optional<Supervisor> findByEmail(String email);
+    /**
+     * Retrieves all the {@code Supervisor} as a List.
+     * @return A List of all {@code Supervisor}.
+     */
+    List<Supervisor> findAll();
 }

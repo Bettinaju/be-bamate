@@ -32,12 +32,12 @@ public class LoadAccountDatabase {
             log.info("Preloading " + accountRepository.save(new Account("freiheit@test.com", "Jörn", "Freiheit", passwordEncoder.encode("12345678"), Role.ADMIN)));
 
             Set<Interest> bettiInterests = EnumSet.of(Interest.WEB_DEVELOPMENT, Interest.DATENBANKEN);
-            log.info("Preloading " + supervisorRepository.save(new Supervisor("betti@test.com", "Betti", "Ju", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Betti's Description", bettiInterests)));
+            log.info("Preloading " + supervisorRepository.save(new Supervisor("betti@test.com", "Betti", "Ju", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Betti's Description", "works", "", bettiInterests)));
 
             Set<Interest> aliceInterests = EnumSet.of(Interest.DATENBANKEN);
-            log.info("Preloading " + supervisorRepository.save(new Supervisor("alice@test.com", "Alice", "Boe", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Alice's Description", aliceInterests)));
+            log.info("Preloading " + supervisorRepository.save(new Supervisor("alice@test.com", "Alice", "Boe", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Alice's Description","", "", aliceInterests)));
 
-            Supervisor notAvailableSupervisor = new Supervisor("jana@test.com", "Jana", "Ko", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Jana's Description - I am not available", Collections.emptySet());
+            Supervisor notAvailableSupervisor = new Supervisor("jana@test.com", "Jana", "Ko", passwordEncoder.encode("12345678"), Role.SUPERVISOR, "Jana's Description - I am not available", "", "", Collections.emptySet());
             notAvailableSupervisor.setAvailability(false);
             log.info("Preloading " + supervisorRepository.save(notAvailableSupervisor));
         };

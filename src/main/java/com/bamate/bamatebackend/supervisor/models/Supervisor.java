@@ -1,3 +1,4 @@
+
 package com.bamate.bamatebackend.supervisor.models;
 
 import com.bamate.bamatebackend.account.models.Account;
@@ -14,7 +15,9 @@ import java.util.Set;
 @Table(name = "supervisor")
 public class Supervisor extends Account {
 
-    private String description;
+    private String recentJob;
+    private String jobReference;
+    private String previousJob;
     private boolean available = true;
 
     @ElementCollection(targetClass = Interest.class)
@@ -30,12 +33,16 @@ public class Supervisor extends Account {
      * @param lastName The {@code lastName} of the {@code Supervisor}.
      * @param password The {@code password} of the {@code Supervisor}.
      * @param role The {@code role} of the {@code Supervisor}.
-     * @param description The {@code description} of the {@code Supervisor}.
+     * @param recentJob The {@code description} of the {@code Supervisor}.
+     * @param previousJob The {@code previousJob} of the {@code Supervisor}.
+     * @param jobReference The {@code jobReference} of the {@code Supervisor}.
      * @param interests The {@code interests} of the {@code Supervisor}.
      */
-    public Supervisor(String email, String firstName, String lastName, String password, Role role, String description, Set<Interest> interests) {
+    public Supervisor(String email, String firstName, String lastName, String password, Role role, String recentJob, String previousJob, String jobReference, Set<Interest> interests) {
         super(email, firstName, lastName, password, role);
-        this.description = description;
+        this.recentJob = recentJob;
+        this.previousJob = previousJob;
+        this.jobReference = jobReference;
         this.interests = interests;
     }
 
@@ -46,28 +53,61 @@ public class Supervisor extends Account {
     public Supervisor(Account account)
     {
         super(account.getEmail(), account.getFirstName(), account.getLastName(), account.getPassword(), Role.SUPERVISOR);
-        this.description = "";
+        this.recentJob = "";
+        this.previousJob = "";
+        this.jobReference = "";
     }
-
     /**
      * Default constructor for {@code Supervisor} class.
      */
     public Supervisor() {}
 
+
     /**
-     * The getter method for {@code description}.
-     * @return The {@code description} of the {@code Supervisor}.
+     * The getter method for {@code recentJob}.
+     * @return The {@code recentJob} of the {@code Supervisor}.
      */
-    public String getDescription() {
-        return description;
+    public String getRecentJob() {
+        return recentJob;
     }
 
     /**
-     * The setter method for {@code description}.
-     * @param description The {@code description} of the {@code Supervisor}.
+     * The setter method for {@code recentJob}.
+     * @param recentJob The {@code recentJob} of the {@code Supervisor}.
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setRecentJob(String recentJob) {
+        this.recentJob = recentJob;
+    }
+
+    /**
+     * The setter method for {@code previousJob}.
+     * @param previousJob The {@code previousJob} of the {@code Supervisor}.
+     */
+    public void setPreviousJob(String previousJob) {
+        this.previousJob = previousJob;
+    }
+    /**
+     * The getter method for {@code previousJob}.
+     * @return The {@code previousJob} of the {@code Supervisor}.
+     */
+    public String getPreviousJob() {
+        return previousJob;
+    }
+
+    /**
+     * The setter method for {@code jobReference}.
+     * @param jobReference The {@code jobReference} of the {@code Supervisor}.
+     */
+    public void setJobReference(String jobReference) {
+        this.jobReference = jobReference;
+    }
+
+    /**
+     * The getter method for {@code jobReference}.
+     * @return The {@code jobReference} of the {@code Supervisor}.
+     */
+    public String getJobReference() {
+        return jobReference;
     }
 
     /**
