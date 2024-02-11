@@ -1,13 +1,17 @@
 package com.bamate.bamatebackend.supervisor.models;
 
-/**
- * An enumeration representing different interests.
- */
 public enum Interest {
-    WEB_DEVELOPMENT,
-    DATENBANKEN,
-    DATA_ANALYTICS,
-    NETZWERKE,
-    PROJEKTMANAGEMENT
+    Web_Development,
+    Datenbanken,
+    Data_Analytics,
+    Netzwerke,
+    Projektmanagement,
+    Künstliche_Intelligenz,
+    Systemadminstration,
+    mobile_Anwendungen,
+    Computergrafik,
+    Robotik,
+    Internet_of_Things,
+    Virtual_Reality,
+    Augmented_Reality
 }
-
