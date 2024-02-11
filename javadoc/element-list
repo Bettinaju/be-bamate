@@ -1,0 +1,9 @@
+com.bamate.bamatebackend
+com.bamate.bamatebackend.account
+com.bamate.bamatebackend.account.controllers
+com.bamate.bamatebackend.account.models
+com.bamate.bamatebackend.auth
+com.bamate.bamatebackend.auth.models
+com.bamate.bamatebackend.config
+com.bamate.bamatebackend.supervisor
+com.bamate.bamatebackend.supervisor.models
